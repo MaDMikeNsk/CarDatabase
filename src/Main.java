@@ -14,7 +14,8 @@ public class Main {
         BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
         String inputNumber = "";
         String inputName;
-        String regex = "(^[а-я][0-9]{3}[а-я]{2}[0-9]{2}$)|(^STOP$)"; //Шаблон номера или команда STOP
+        String numberRegex = "(^[а-я][0-9]{3}[а-я]{2}[0-9]{2}$)|(^STOP$)"; //Шаблон номера или команда STOP
+        String nameRegex = "^[А-Я][а-я]+$";                                //Шаблон имени (одиночное: Вася, Петя, ...)
         final String ANSI_RED = "\u001B[31m";
         final String ANSI_BLUE = "\u001B[34m";
         final String ANSI_RESET = "\u001B[0m";
@@ -23,10 +24,10 @@ public class Main {
             do {
                 System.out.println("Введите номер автомобиля или команду <STOP> для выхода из программы");
                 inputNumber = reader.readLine().trim();
-                if (!inputNumber.matches(regex)) {
+                if (!inputNumber.matches(numberRegex)) {
                     System.out.println("Неправильный формат ввода. Попробуйте ещё раз");
                 }
-            } while (!inputNumber.matches(regex));
+            } while (!inputNumber.matches(numberRegex));
 
             if (!inputNumber.equals("STOP")) {
                 if (carDatabase.containsKey(inputNumber)) {
@@ -36,7 +37,10 @@ public class Main {
                     System.out.println("Автомобиль в базе не зарегистрирован. Для регистрации введите имя владельца:");
                     do {
                         inputName = reader.readLine().trim();
-                    } while (!inputName.matches("^[А-Я][а-я]+$")); //Шаблон имени (одиночное: Вася, Петя, ...)
+                        if (!inputName.matches(nameRegex)) {
+                            System.out.println("Неправильный формат ввода. Попробуйте ещё раз");
+                        }
+                    } while (!inputName.matches(nameRegex));
                     carDatabase.put(inputNumber, inputName);
                     System.out.println("Автомобиль с номером " + ANSI_RED + inputNumber + ANSI_RESET +
                             " добавлен в базу. Владелец: " + ANSI_RED + inputName + ANSI_RESET);
