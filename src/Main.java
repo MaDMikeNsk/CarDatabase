@@ -8,7 +8,7 @@ import java.io.InputStreamReader;
 import java.util.HashMap;
 
 public class Main {
-
+//
     public static void main(String[] args) throws IOException {
         HashMap <String, String> carDatabase = new HashMap<>(); //<Номер авто, Имя владельца>
         BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
