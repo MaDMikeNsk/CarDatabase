@@ -8,14 +8,14 @@ import java.io.InputStreamReader;
 import java.util.HashMap;
 
 public class Main {
-//
+
     public static void main(String[] args) throws IOException {
         HashMap <String, String> carDatabase = new HashMap<>(); //<Номер авто, Имя владельца>
         BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
         String inputNumber = "";
         String inputName;
         String numberRegex = "(^[а-я][0-9]{3}[а-я]{2}[0-9]{2}$)|(^STOP$)"; //Шаблон номера или команда STOP
-        String nameRegex = "^[А-Я][а-я]+$";                                //Шаблон имени (одиночное: Вася, Петя, ...)
+        String nameRegex = "^[А-Яа-я\\s]+$";                                //Шаблон имени (одиночное: Вася, Петя, ...)
         final String ANSI_RED = "\u001B[31m";
         final String ANSI_BLUE = "\u001B[34m";
         final String ANSI_RESET = "\u001B[0m";
